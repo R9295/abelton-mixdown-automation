@@ -3,12 +3,10 @@ import _Framework
 from _Framework.ControlSurface import ControlSurface
 from log import log
 from threading import Thread, RLock
+from server import Server
 
 
-lock = RLock()
-
-
-class Mixdown(ControlSurface):
+class Mixdown(ControlSurface, Server):
     def _initialize_audio_tracks(self):
         i = 1
         tracks = self.song().tracks
@@ -71,12 +69,11 @@ class Mixdown(ControlSurface):
 
     def disconnect(self):
         log('Disconnecting!')
-        self.server.stop()
+        self.stop()
 
     def __init__(self, c_instance):
-        from server import Server
         super(Mixdown, self).__init__(c_instance)
-        self.server = Server(ctrl_surface=self)
-        thread = threading.Thread(target=self.server.start)
+        self.lock = RLock()
+        thread = threading.Thread(target=self.start)
         thread.daemon = True
         thread.start()

@@ -1,7 +1,6 @@
 import socket
 from log import log
 import traceback
-from main import lock
 
 
 home_page = '''
@@ -43,8 +42,6 @@ home_page = '''
 </html>
 '''
 class Server(object):
-    def __init__(self, ctrl_surface):
-        self._ctrl_surface = ctrl_surface
 
     def stop(self):
         self._socket.close()
@@ -64,11 +61,11 @@ class Server(object):
                 # Get the client request
                 request = client_connection.recv(9086).decode()
                 if 'POST /initialize' in str(request):
-                    with lock:
-                        self._ctrl_surface.handle_initialize()
+                    with self.lock:
+                        self.handle_initialize()
                 if 'POST /revert' in str(request):
-                    with lock:
-                        self._ctrl_surface.handle_revert()
+                    with self.lock:
+                        self.handle_revert()
                 # Send HTTP response
                 response = 'HTTP/1.0 200 OK\n\n%s' % home_page
                 client_connection.sendall(response.encode())
