@@ -22,7 +22,7 @@ class Mixdown(ControlSurface, Server):
         tracks = self.song().tracks
         for index, track in enumerate(tracks):
             track.index = index
-            self.schedule_message(1, lambda: setattr(track.view, 'is_collapsed', False))
+            setattr(track.view, 'is_collapsed',  not track.has_midi_input)
             if track.has_midi_input:
                 self._midi_tracks.append(track)
             else:
@@ -44,7 +44,7 @@ class Mixdown(ControlSurface, Server):
 
     def handle_initialize(self):
         self._initialize_audio_tracks()
-        self._index_and_set_tracks()
+        self.schedule_message(1, self._index_and_set_tracks)
         self.schedule_message(1, self._transfer_vsts)
         log('Done Initializing!')
 
