@@ -1,7 +1,7 @@
 from utils import get_dir
 
 
-LOG_FILE_PATH = "%s\log.txt" % get_dir()
+LOG_FILE_PATH = "%s/log.txt" % get_dir()
 
 def log(message):
     with open(LOG_FILE_PATH, "a") as log:

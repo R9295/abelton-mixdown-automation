@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>Mixdown Automation</title>
+    <style>
+      footer {
+        position: fixed;
+        left: 0;
+        bottom: 0;
+        margin-bottom: 2rem;
+        width: 100%;
+        text-align: center;
+      }
+</style>
+  </head>
+  <body>
+    Hello! <br />
+    <p>
+        Instructions: <br/><br/>
+        1. Press Initialize,
+        this will an create audio tracks for each MIDI track and copy over all VSTs on the MIDI track that isn't an instrument to the audio track created for it.<br/> <br />
+        2. Proceed to flatten and freeze these the MIDI tracks (Needs to be done manually as Ableton does not provide an API for it.) <br /><br/>
+        3. Press Revert,
+        this will copy all the VSTs back over to the MIDI tracks and delete the audio track.
+    </p>
+    <button id="init"> Initialize </button>
+    <button id="revert" disabled> Revert </button>
+
+    <script>
+        init = document.getElementById('init')
+        init.onclick = function () {
+            init.setAttribute("disabled", "disabled");
+            fetch('/initialize', {method: 'POST'}).then(() => {
+            revert.removeAttribute("disabled");
+            alert('Done Initializing');
+            })
+        }
+        revert = document.getElementById('revert')
+        revert.onclick = function () {
+            revert.setAttribute("disabled", "disabled");
+            fetch('/revert', {method: 'POST'}).then(() => alert('Done Reverting'))
+        }
+    </script>
+    <footer>
+        Author: <a href="https://github.com/R9295">R9295</a><br/>
+        License: GPL-3.0, spread the copyleft love.
+    </footer>
+  </body>
+</html>
