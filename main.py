@@ -21,6 +21,7 @@ class Mixdown(ControlSurface, Server):
         tracks = self.song().tracks
         for index, track in enumerate(tracks):
             track.index = index
+            # Collapse all audio tracks so its easy to select and freeze MIDI tracks
             setattr(track.view, 'is_collapsed',  not track.has_midi_input)
             if track.has_midi_input:
                 self._midi_tracks.append(track)
