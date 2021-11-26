@@ -24,12 +24,15 @@ class Server(object):
                 request = client_connection.recv(9086).decode()
                 if 'POST /initialize' in str(request):
                     self.handle_initialize()
-                if 'POST /revert' in str(request):
+                    response = 'HTTP/1.0 200 OK\n\n%s'
+                elif 'POST /revert' in str(request):
                     self.handle_revert()
-                with open('%s/index.html' % get_dir(), 'r') as html:
-                    response = 'HTTP/1.0 200 OK\n\n%s' % html.read()
-                    client_connection.sendall(response.encode())
-                    client_connection.close()
+                    response = 'HTTP/1.0 200 OK\n\n%s'
+                else:
+                    with open('%s/index.html' % get_dir(), 'r') as html:
+                        response = 'HTTP/1.0 200 OK\n\n%s' % html.read()
+                client_connection.sendall(response.encode())
+                client_connection.close()
         except Exception as e:
             log('Error %s' % str(e))
             log(traceback.format_exc())
