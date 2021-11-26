@@ -4,8 +4,7 @@ A script that transfers all the VSTs on your MIDI tracks to a new track so you c
 
 ## Setup:
 
-1. Copy paste the downloaded/cloned repository in your Remote Scripts folder.
-2. Refer to the link to find out where the folder is for your OS:
+1. Copy paste the downloaded/cloned repository in your Remote Scripts folder. Refer to the link to find out where the folder is for your OS:
 https://help.ableton.com/hc/en-us/articles/206240184-Creating-your-own-Control-Surface-script
 
 3. Select "ableton-mixdown-automation" in Preferences > Link/MIDI
