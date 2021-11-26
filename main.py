@@ -1,8 +1,7 @@
-import threading
-import _Framework
+from threading import Thread
 from _Framework.ControlSurface import ControlSurface
+
 from log import log
-from threading import Thread, RLock
 from server import Server
 
 
@@ -73,7 +72,6 @@ class Mixdown(ControlSurface, Server):
 
     def __init__(self, c_instance):
         super(Mixdown, self).__init__(c_instance)
-        self.lock = RLock()
-        thread = threading.Thread(target=self.start)
+        thread = Thread(target=self.start)
         thread.daemon = True
         thread.start()

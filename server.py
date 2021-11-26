@@ -1,6 +1,7 @@
 import socket
-from log import log
 import traceback
+
+from log import log
 from utils import get_dir
 
 
@@ -22,11 +23,9 @@ class Server(object):
                 client_connection, client_address = self._socket.accept()
                 request = client_connection.recv(9086).decode()
                 if 'POST /initialize' in str(request):
-                    with self.lock:
-                        self.handle_initialize()
+                    self.handle_initialize()
                 if 'POST /revert' in str(request):
-                    with self.lock:
-                        self.handle_revert()
+                    self.handle_revert()
                 with open('%s/index.html' % get_dir(), 'r') as html:
                     response = 'HTTP/1.0 200 OK\n\n%s' % html.read()
                     client_connection.sendall(response.encode())
