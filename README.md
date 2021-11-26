@@ -13,6 +13,7 @@ https://help.ableton.com/hc/en-us/articles/206240184-Creating-your-own-Control-S
 
 ## Note
 It cannot freeze and flatten your tracks automatically as the Ableton API does not allow that.<br/>
+Tested on Ableton 10.18.0 on Windows. I welcome contributions and/or issues so I can also adapt it for OSX/Ableton 11 if it does not work without changes.
 The web interface sucks but does the job lol<br/>
 **Errors**? **Wanna debug**? Check log.txt or see the code, it's very straightforward.
 
