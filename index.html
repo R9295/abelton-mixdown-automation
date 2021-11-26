@@ -4,6 +4,10 @@
     <meta charset="utf-8">
     <title>Mixdown Automation</title>
     <style>
+      html {
+        display: flex;
+        justify-content: center;
+      }
       footer {
         position: fixed;
         left: 0;
@@ -12,6 +16,10 @@
         width: 100%;
         text-align: center;
       }
+      body {
+        width: 80%;
+        padding-top: 10rem
+      }
 </style>
   </head>
   <body>
@@ -19,27 +27,30 @@
     <p>
         Instructions: <br/><br/>
         1. Press Initialize,
-        this will an create audio tracks for each MIDI track and copy over all VSTs on the MIDI track that isn't an instrument to the audio track created for it.<br/> <br />
+        this will an create audio track for each MIDI track and copy over all VSTs on the MIDI track that isn't an instrument to the audio track created for it.<br/> <br />
         2. Proceed to flatten and freeze these the MIDI tracks (Needs to be done manually as Ableton does not provide an API for it.) <br /><br/>
         3. Press Revert,
         this will copy all the VSTs back over to the MIDI tracks and delete the audio track.
     </p>
     <button id="init"> Initialize </button>
     <button id="revert" disabled> Revert </button>
-
+    <h1 id="message"></h1>
     <script>
+        message = document.getElementById('message')
         init = document.getElementById('init')
         init.onclick = function () {
+          message.innterHTML = 'Initializing ...'
             init.setAttribute("disabled", "disabled");
             fetch('/initialize', {method: 'POST'}).then(() => {
             revert.removeAttribute("disabled");
-            alert('Done Initializing');
+            message.innerHTML = 'Done Initializing'
             })
         }
         revert = document.getElementById('revert')
         revert.onclick = function () {
+          message.innterHTML = 'Reverting ...'
             revert.setAttribute("disabled", "disabled");
-            fetch('/revert', {method: 'POST'}).then(() => alert('Done Reverting'))
+            fetch('/revert', {method: 'POST'}).then(() => {message.innerHTML = 'Done Reverting'})
         }
     </script>
     <footer>
