@@ -1,6 +1,6 @@
 # Automate Mixdown initialization
 
-A script that transfers all the VSTs on your MIDI tracks to a new track so you can freeze your MIDI tracks and then copies the VSTs back over for you <br/>
+A script that transfers all the VSTs on your MIDI tracks to a new track so you can freeze your MIDI tracks and then copies the VSTs back over for you and deletes the new tracks <br/>
 
 ## Setup:
 
