@@ -9,7 +9,7 @@ https://help.ableton.com/hc/en-us/articles/206240184-Creating-your-own-Control-S
 
 3. Select "ableton-mixdown-automation" in Preferences > Link/MIDI
 
-4. Go to: 127.0.0.1:5010 or localhost:5010 and follow the instructions
+4. Go to: 127.0.0.1:5010 or localhost:5010 in your browser and follow the instructions
 
 ## Note
 It cannot freeze and flatten your tracks automatically as the Ableton API does not allow that.<br/>
